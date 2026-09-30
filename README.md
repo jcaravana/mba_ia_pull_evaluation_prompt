@@ -433,15 +433,24 @@ Baixa o prompt `bug_to_user_story_v1` do LangSmith Hub e salva em `prompts/bug_t
 
 Não tem comando: é a edição do arquivo `prompts/bug_to_user_story_v2.yml`, aplicando as técnicas descritas na seção A. O arquivo tem os campos `system_prompt`, `user_prompt`, `description` e `techniques_applied`.
 
-Antes do push, rode os testes de validação:
+**Fase 3: validação automatizada do prompt**
 
 ```bash
 pytest tests/test_prompts.py -v
 ```
 
-Os testes verificam se o prompt tem `system_prompt`, define uma persona, exige o formato de user story, tem exemplos few-shot, não tem `[TODO]` esquecido e lista pelo menos 2 técnicas.
+Antes de publicar, essa fase valida localmente (sem chamar o LangSmith nem nenhum LLM) se o prompt refatorado está estruturalmente correto. O `tests/test_prompts.py` varre todo `.yml` de `prompts/` que siga o schema `system_prompt`/`user_prompt` — hoje só o `bug_to_user_story_v2.yml` se encaixa, mas um `v3.yml` futuro entraria automaticamente — e roda 6 checagens em cada um:
 
-**Fase 3: push do prompt otimizado (v2)**
+1. `system_prompt` existe e não está vazio
+2. Define uma persona (ex.: "Você é um...")
+3. Exige o formato de user story ("Como um..." + "Critérios de Aceitação")
+4. Tem pelo menos 2 exemplos few-shot (pares `<bug_report>`/`<resposta>`)
+5. Não ficou nenhum `[TODO]` esquecido no texto
+6. Lista pelo menos 2 técnicas em `techniques_applied`
+
+Só siga para o push se todos os testes passarem.
+
+**Fase 4: push do prompt otimizado (v2)**
 
 ```bash
 python src/push_prompts.py
@@ -449,7 +458,7 @@ python src/push_prompts.py
 
 Lê o `prompts/bug_to_user_story_v2.yml`, valida o conteúdo e publica como `<USERNAME_LANGSMITH_HUB>/bug_to_user_story_v2` (público) no LangSmith Hub.
 
-**Fase 4: avaliação**
+**Fase 5: avaliação**
 
 ```bash
 python src/evaluate.py
