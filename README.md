@@ -385,7 +385,7 @@ Todas estão no `requirements.txt`:
 
 ```bash
 # 1. Clonar o repositório
-git clone [URL do seu fork]
+git clone https://github.com/jcaravana/mba_ia_pull_evaluation_prompt.git
 cd mba-ia-pull-evaluation-prompt
 
 # 2. Criar e ativar o ambiente virtual
