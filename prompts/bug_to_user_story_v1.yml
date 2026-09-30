@@ -1,0 +1,76 @@
+- !!python/object:langchain_core.prompts.chat.SystemMessagePromptTemplate
+  __dict__:
+    prompt: !!python/object:langchain_core.prompts.prompt.PromptTemplate
+      __dict__:
+        name: null
+        input_variables:
+        - bug_report
+        optional_variables: []
+        input_types: {}
+        output_parser: null
+        partial_variables: {}
+        metadata: null
+        tags: null
+        template: 'Você é um assistente que ajuda a transformar relatos de bugs de
+          usuários em tarefas para desenvolvedores.
+
+
+          Analise o relato de bug abaixo e crie uma user story a partir dele.
+
+
+          Relato de Bug:
+
+          ---
+
+          {bug_report}
+
+          ---
+
+
+          User Story gerada:
+
+          '
+        template_format: f-string
+        validate_template: false
+      __pydantic_extra__: null
+      __pydantic_fields_set__: !!set
+        input_variables: null
+        template: null
+        partial_variables: null
+        template_format: null
+      __pydantic_private__: null
+    additional_kwargs: {}
+  __pydantic_extra__: null
+  __pydantic_fields_set__: !!set
+    prompt: null
+  __pydantic_private__:
+    _msg_class: !!python/name:langchain_core.messages.system.SystemMessage ''
+- !!python/object:langchain_core.prompts.chat.HumanMessagePromptTemplate
+  __dict__:
+    prompt: !!python/object:langchain_core.prompts.prompt.PromptTemplate
+      __dict__:
+        name: null
+        input_variables:
+        - bug_report
+        optional_variables: []
+        input_types: {}
+        output_parser: null
+        partial_variables: {}
+        metadata: null
+        tags: null
+        template: '{bug_report}'
+        template_format: f-string
+        validate_template: false
+      __pydantic_extra__: null
+      __pydantic_fields_set__: !!set
+        input_variables: null
+        template: null
+        partial_variables: null
+        template_format: null
+      __pydantic_private__: null
+    additional_kwargs: {}
+  __pydantic_extra__: null
+  __pydantic_fields_set__: !!set
+    prompt: null
+  __pydantic_private__:
+    _msg_class: !!python/name:langchain_core.messages.human.HumanMessage ''
